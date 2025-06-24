@@ -1,0 +1,6 @@
+CREATE TABLE candidate (
+  id BIGINT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255),
+  votes INT
+);
+

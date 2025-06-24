@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Voting App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        .candidate {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 5px #ccc;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Voting App</h1>
+    <div id="candidates"></div>
+
+    <script>
+        function loadCandidates() {
+            fetch('/api/vote/candidates')
+                .then(res => res.json())
+                .then(data => {
+                    const container = document.getElementById('candidates');
+                    container.innerHTML = '';
+
+                    data.forEach(candidate => {
+                        const div = document.createElement('div');
+                        div.className = 'candidate';
+                        div.innerHTML = `
+                            <strong>${candidate.name}</strong> - ${candidate.votes} votes
+                            <button onclick="vote(${candidate.id})">Vote</button>
+                        `;
+                        container.appendChild(div);
+                    });
+                });
+        }
+
+        function vote(id) {
+            fetch(`/api/vote/${id}`, { method: 'POST' })
+                .then(() => loadCandidates());
+        }
+
+        loadCandidates();
+    </script>
+</body>
+</html>
+

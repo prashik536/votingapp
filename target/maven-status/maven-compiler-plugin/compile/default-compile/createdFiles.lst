@@ -1,0 +1,5 @@
+com/example/votingapp/service/VoteService.class
+com/example/votingapp/model/Candidate.class
+com/example/votingapp/controller/VoteController.class
+com/example/votingapp/VotingAppApplication.class
+com/example/votingapp/repository/CandidateRepository.class
