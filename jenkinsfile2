@@ -31,7 +31,7 @@ pipeline {
                 echo 'Starting the Java application...'
                 sh '''
                     cd /var/lib/jenkins/workspace/test1/target
-                    nohup java -jar voting-app-1.0.jar > app.log 2>&1 & disown
+                    setsid java -jar voting-app-1.0.jar > app.log 2>&1 & 
                     sleep 3
                     ps -ef | grep voting
                 '''
