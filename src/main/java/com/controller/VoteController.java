@@ -2,7 +2,6 @@ package com.example.votingapp.controller;
 
 import com.example.votingapp.model.Candidate;
 import com.example.votingapp.service.VoteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,9 +9,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/vote")
 public class VoteController {
+    private final VoteService voteService;
 
-    @Autowired
-    private VoteService voteService;
+    public VoteController(VoteService voteService) {
+        this.voteService = voteService;
+    }
 
     @GetMapping("/candidates")
     public List<Candidate> getCandidates() {
@@ -24,4 +25,3 @@ public class VoteController {
         return voteService.vote(id);
     }
 }
-
